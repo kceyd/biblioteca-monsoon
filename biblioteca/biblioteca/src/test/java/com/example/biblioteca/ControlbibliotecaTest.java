@@ -44,11 +44,11 @@ public class ControlbibliotecaTest {
 
     @BeforeEach
     void setUp() {
-        // Creamos el juego sin usar .setNombre() para evitar el error de compilación
+      
         DTOjuego juegoDto = new DTOjuego();
         juegoDto.setId(100L);
 
-        // Instanciamos el DTO de respuesta con datos simulados
+      
         dtoMuestra = new DTOBiblioteca();
         dtoMuestra.setId(1L);
         dtoMuestra.setUsuarioId(5L);
@@ -56,7 +56,7 @@ public class ControlbibliotecaTest {
         dtoMuestra.setHorasJugadas(10.0);
         dtoMuestra.setJuego(juegoDto);
 
-        // Instanciamos la entidad de entrada para las pruebas del método POST
+      
         entidadMuestra = new bibliotecaus();
         entidadMuestra.setId(1L);
         entidadMuestra.setUsuarioId(5L);
@@ -67,10 +67,10 @@ public class ControlbibliotecaTest {
     @SuppressWarnings("null")
     @Test
     void testObtenerEntradaPorId_DebeRetornarDTOMasHateoas() throws Exception {
-        // Configuramos el mock para que devuelva nuestro DTO simulado
+        
         when(servicio.obtenerEntradaConJuego(1L)).thenReturn(dtoMuestra);
 
-        // Simulamos la petición GET y verificamos los datos y la estructura HATEOAS (_links)
+       
         mockMvc.perform(get("/api/v0/biblioteca/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -84,7 +84,7 @@ public class ControlbibliotecaTest {
     @SuppressWarnings("null")
     @Test
     void testCrearEntrada_DebeRetornarStatusOk() throws Exception {
-        // Simulamos la petición POST convirtiendo la entidad a JSON
+       
         mockMvc.perform(post("/api/v0/biblioteca")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(entidadMuestra)))
